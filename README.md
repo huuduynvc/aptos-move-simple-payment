@@ -1,107 +1,135 @@
-C:\Users\PC\Documents\aptos-move-iap-smc> aptos move publish --named-addresses iap=0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46
-Compiling, may take a little while to download git dependencies...
-UPDATING GIT DEPENDENCY https://github.com/aptos-labs/aptos-framework.git
-INCLUDING DEPENDENCY AptosFramework
-INCLUDING DEPENDENCY AptosStdlib
-INCLUDING DEPENDENCY MoveStdlib
-BUILDING iap_payment
-package size 3366 bytes
-Do you want to submit a transaction for a range of [226300 - 339400] Octas at a gas unit price of 100 Octas? [yes/no] >
-yes
-Transaction submitted: https://explorer.aptoslabs.com/txn/0x845d6927170855740ddf35ed50b1bb2b464b0654b646c81994f868eb7be7ea45?network=testnet
-{
-  "Result": {
-    "transaction_hash": "0x845d6927170855740ddf35ed50b1bb2b464b0654b646c81994f868eb7be7ea45",
-    "gas_used": 2263,
-    "gas_unit_price": 100,
-    "sender": "b75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46",
-    "sequence_number": 3,
-    "success": true,
-    "timestamp_us": 1747110992074230,
-    "version": 6719752244,
-    "vm_status": "Executed successfully"
-  }
-}
+# Aptos Move IAP Smart Contract
 
-PS C:\Users\PC\Documents\aptos-move-iap-smc> aptos move run --function-id 0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46::payment::initialize
-Do you want to submit a transaction for a range of [92500 - 138700] Octas at a gas unit price of 100 Octas? [yes/no] >
-yes
-Transaction submitted: https://explorer.aptoslabs.com/txn/0x98ba12d189907cdee40696e268cb04cc556bb01c1105ded6c5782a1ea2cc3cc9?network=testnet
-{
-  "Result": {
-    "transaction_hash": "0x98ba12d189907cdee40696e268cb04cc556bb01c1105ded6c5782a1ea2cc3cc9",
-    "gas_used": 925,
-    "gas_unit_price": 100,
-    "sender": "b75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46",
-    "sequence_number": 4,
-    "success": true,
-    "timestamp_us": 1747111023055458,
-    "version": 6719753177,
-    "vm_status": "Executed successfully"
-  }
-}
+This project contains an Aptos Move smart contract for handling In-App Purchases (IAP) or similar payment flows.
 
-PS C:\Users\PC\Documents\aptos-move-iap-smc> aptos config show-profiles
-{
-  "Result": {
-    "default": {
-      "network": "Testnet",
-      "has_private_key": true,
-      "public_key": "ed25519-pub-0x5c96843daabb67c43dd68ddee9aa88cf2b3d63b3f09910aa2d7f4c574afd7796",
-      "account": "b75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46",
-      "rest_url": "https://fullnode.testnet.aptoslabs.com"
-    }
-  }
-}
+## Prerequisites
 
-PS C:\Users\PC\Documents\aptos-move-iap-smc> aptos move compile --named-addresses iap=0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46
+-   [Aptos CLI](https://aptos.dev/cli-tools/aptos-cli/use-aptos-cli) installed.
+-   An Aptos wallet/account for deployment and interaction, with funds for Testnet.
 
-PC@DESKTOP-3J9VRFO MINGW64 ~/Documents/aptos-move-iap-smc
-$         aptos move run \
-            --function-id 0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46::payment::process_payment \    
-            --args address:0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46 string:"low_amount_payment" string:"" u64:1000000
-Do you want to submit a transaction for a range of [1600 - 2400] Octas at a gas unit price of 100 Octas? [yes/no] >
-yes
-Transaction submitted: https://explorer.aptoslabs.com/txn/0xd0d22b5ee35676408b98843cc5c5de858aa6e11bca409915e58e87b4590e06b8?network=testnet
-{
-  "Result": {
-    "transaction_hash": "0xd0d22b5ee35676408b98843cc5c5de858aa6e11bca409915e58e87b4590e06b8",
-    "gas_used": 16,
-    "gas_unit_price": 100,
-    "sender": "b75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46",
-    "sequence_number": 7,
-    "success": true,
-    "timestamp_us": 1747112036666671,
-    "version": 6719783239,
-    "vm_status": "Executed successfully"
-  }
-}
+## Development
 
-PC@DESKTOP-3J9VRFO MINGW64 ~/Documents/aptos-move-iap-smc
-$ aptos move view     --function-id 0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46::payment::get_treasury     --args address:0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46
-{
-  "Result": [
-    "0xbb424495ab94d46f42d50aac7b95f87095d82d14707c13a70093c59db946eee2"
-  ]
-}
+### Named Addresses
 
-PC@DESKTOP-3J9VRFO MINGW64 ~/Documents/aptos-move-iap-smc
-$ aptos move run \
-    --function-id 0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46::payment::update_treasury \
-    --args address:0xb75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46 address:0xbb424495ab94d46f42d50aac7b95f87095d82d14707c13a70093c59db946eee2
-Do you want to submit a transaction for a range of [600 - 900] Octas at a gas unit price of 100 Octas? [yes/no] >
-yes
-Transaction submitted: https://explorer.aptoslabs.com/txn/0xc115a5f233099609e94e83a92b7c542d5a753e738a174b07ab7aa851da83646c?network=testnet
-{
-  "Result": {
-    "transaction_hash": "0xc115a5f233099609e94e83a92b7c542d5a753e738a174b07ab7aa851da83646c",
-    "gas_used": 6,
-    "gas_unit_price": 100,
-    "sender": "b75e963711fc8fe9cd058900bb86dd3a6ec6e5e94c908ca083e04ab2b6337c46",
-    "sequence_number": 5,
-    "success": true,
-    "timestamp_us": 1747111820955414,
-    "version": 6719776921,
-    "vm_status": "Executed successfully"
-  }
-}
+This contract uses a named address `iap`.
+
+-   For local development and testing, `iap` can be a placeholder or a specific dev account address defined in `Move.toml` under `[dev-addresses]`.
+    Example `Move.toml` snippet:
+    ```toml
+    [addresses]
+    # iap = "_" # Ensure this is commented out or set to a placeholder if not using a fixed address for compilation
+
+    [dev-addresses]
+    iap = "0xCAFE" # Or any other test address
+    test_admin = "0xAD"
+    test_user = "0xUS"
+    test_user2 = "0xU2"
+    ```
+-   For deployment to Testnet or Mainnet, `iap` **must** be replaced with the actual account address that will deploy and own the module.
+
+### 1. Compile the Smart Contract
+
+To compile the contract locally, navigate to the project root directory and run:
+
+```bash
+aptos move compile --named-addresses iap=YOUR_ACCOUNT_ADDRESS
+```
+
+Replace `YOUR_ACCOUNT_ADDRESS` with the address you intend to use or the one defined in `[dev-addresses]` if you have `iap = "_"` in `[addresses]`. If `iap` is hardcoded in `[addresses]` in `Move.toml` (e.g., `iap = "0xCAFE"`), you might not need to specify it in the command, but it's good practice for clarity, especially when preparing for deployment.
+
+**Note:** If you have `iap = "YOUR_ACTUAL_ADDRESS"` in the `[addresses]` section of your `Move.toml`, you can simply run `aptos move compile`. However, for flexibility between local testing and deployment, it's common to use a placeholder or comment out the `iap` line in `[addresses]` and provide it at compile/publish time.
+
+### 2. Run Unit Tests
+
+To execute the unit tests defined in the `tests/` directory:
+
+```bash
+aptos move test
+```
+
+Ensure your `Move.toml` is configured correctly with any necessary `[dev-addresses]` for the tests to run.
+
+## Deploying to Testnet
+
+Follow these steps to deploy your smart contract to the Aptos Testnet.
+
+### 1. Configure Aptos CLI for Testnet (if not already done)
+
+If you don't have a profile for Testnet, create one:
+
+```bash
+aptos init --network testnet --profile your_testnet_profile
+```
+
+Replace `your_testnet_profile` with a name you prefer (e.g., `testnet-default`). This will guide you through creating or importing an account for Testnet. Make sure this account has some Testnet APT for gas fees. You can get Testnet APT from the [Aptos Faucet](https://aptoslabs.com/testnet-faucet).
+
+Let's say your Testnet profile is named `testnet` and your Testnet account address is `0xYOUR_TESTNET_ACCOUNT_ADDRESS`.
+
+### 2. Get Your Testnet Account Address
+
+If you need to find your Testnet account address for the configured profile:
+```bash
+aptos config show-current-network --profile your_testnet_profile
+```
+Or, if it's your default profile or you only have one Testnet profile set up:
+```bash
+aptos account lookup-address --profile your_testnet_profile
+```
+(The `aptos account list --profile your_testnet_profile` command can also show addresses associated with profiles).
+
+Let `YOUR_TESTNET_DEPLOYER_ADDRESS` be this address.
+
+### 3. Compile for Testnet Deployment
+
+Before deploying, compile the contract, explicitly setting the `iap` named address to your Testnet deployer address. **Important:** Ensure that the `iap` line in the `[addresses]` section of your `Move.toml` is either commented out or uses a placeholder like `_`.
+
+```bash
+aptos move compile --named-addresses iap=YOUR_TESTNET_DEPLOYER_ADDRESS --profile your_testnet_profile
+```
+
+### 4. Publish to Testnet
+
+Publish the compiled module to Testnet:
+
+```bash
+aptos move publish --named-addresses iap=YOUR_TESTNET_DEPLOYER_ADDRESS --profile your_testnet_profile
+```
+
+This command will also prompt you to confirm the gas fees.
+
+### 5. Initialize the Module on Testnet (if applicable)
+
+If your module has an initialization function (e.g., `payment::initialize`), run it using your Testnet deployer account:
+
+```bash
+aptos move run \
+  --function-id YOUR_TESTNET_DEPLOYER_ADDRESS::payment::initialize \
+  --profile your_testnet_profile
+```
+
+(Adjust `payment::initialize` if your module name or initialize function name is different).
+
+After these steps, your smart contract should be live on Testnet at `YOUR_TESTNET_DEPLOYER_ADDRESS`.
+
+## Interacting with the Deployed Contract (Examples)
+
+### View a function
+
+```bash
+aptos move view \
+  --function-id YOUR_TESTNET_DEPLOYER_ADDRESS::payment::get_treasury \
+  --args address:YOUR_TESTNET_DEPLOYER_ADDRESS \
+  --profile your_testnet_profile
+```
+
+### Call an entry function (e.g., process_payment)
+
+You would typically do this via a script or application, but for CLI:
+
+```bash
+aptos move run \
+  --function-id YOUR_TESTNET_DEPLOYER_ADDRESS::payment::process_payment \
+  --args address:YOUR_TESTNET_DEPLOYER_ADDRESS string:"test_payment_001" string:"some_data" u64:1000000 \
+  --profile your_testnet_profile 
+```
+This assumes the `process_payment` function is called by the `payer` who is also the account associated with `your_testnet_profile`. The first `address:` argument is `module_addr`.

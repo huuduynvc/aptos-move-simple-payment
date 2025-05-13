@@ -1,0 +1,26 @@
+[package]
+name = "iap_payment"
+version = "1.0.0"
+authors = []
+
+[addresses]
+iap = "0xCAFE"
+test_admin = "_"
+test_user = "_" 
+test_user2 = "_"
+
+[dev-addresses]
+# Define addresses for testing purposes
+# For example:
+# aptos_framework = "0x1" # This line will be removed as it's provided by the AptosFramework dependency
+test_admin = "0xAD"
+test_user = "0xFACE"
+test_user2 = "0xF00D"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet" # Or specific tag/commit if needed
+subdir = "aptos-framework"
+
+[dev-dependencies]
+# Specify development dependencies here if needed

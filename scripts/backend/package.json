@@ -1,0 +1,31 @@
+{
+  "name": "iap-payment-backend",
+  "version": "1.0.0",
+  "description": "Backend cron job to monitor Aptos IAP payments",
+  "main": "dist/cron_job.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cron_job.js",
+    "dev": "tsc && node dist/cron_job.js"
+  },
+  "keywords": [
+    "aptos",
+    "blockchain",
+    "payment",
+    "cron"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.13.0",
+    "dotenv": "^16.4.5",
+    "got": "^11.8.5",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/node-cron": "^3.0.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+} 

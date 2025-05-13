@@ -1,0 +1,12 @@
+# Dependencies
+/node_modules
+
+# Build output
+/dist
+
+# Misc
+.DS_Store
+*.pem
+
+# Environment Variables
+.env* 

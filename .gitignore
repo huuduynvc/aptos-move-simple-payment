@@ -1,0 +1,17 @@
+.aptos/
+build/
+.env
+scripts/backend/dist/
+scripts/backend/node_modules/
+scripts/backend/.env
+scripts/backend/.env.local
+scripts/backend/.env.development.local
+scripts/backend/.env.test.local
+scripts/backend/.env.production.local
+scripts/client/node_modules/
+scripts/client/dist/
+scripts/client/.env
+scripts/client/.env.local
+scripts/client/.env.development.local
+scripts/client/.env.test.local
+scripts/client/.env.production.local
